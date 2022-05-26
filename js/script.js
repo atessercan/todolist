@@ -37,12 +37,22 @@ function refresh() {
     element.addEventListener("click", taskDelete);
   });
 }
-
+var toggle=0;
 function taskDone() {
+  if (toggle%2==0){
   this.setAttribute(
     "style",
     "text-decoration: line-through; font-style: italic;"
   );
+  toggle++;
+}
+else {
+  this.setAttribute(
+    "style",
+    "text-decoration: none; font-style: normal;"
+  );
+  toggle++;
+}
 }
 function taskDelete() {
   this.parentElement.remove();
