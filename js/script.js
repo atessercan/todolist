@@ -1,9 +1,25 @@
 refresh();
-/* creating new tasks */
+var textArea;
+var text;
+
+// getting tasks from local storage
+function getTasks() {
+  let ul = document.querySelector("#list");
+  for (let i = 0; i < localStorage.length; i++) {
+    let key = localStorage.key(i);
+    let li = document.createElement("li");
+    li.innerHTML = localStorage.getItem(key);
+    ul.appendChild(li);
+  }
+  refresh();
+}
+
+// creating new tasks
 function newElement() {
   // take value of input area
   textArea = document.querySelector("#task");
-  const text = textArea.value;
+  let ul = document.querySelector("#list");
+  text = textArea.value;
   if (text != "") {
     // create new list item
     let li = document.createElement("li");
@@ -11,13 +27,17 @@ function newElement() {
     li.innerHTML =
       text +
       '<button type="button" class="close mt-1 mr-2 p-2" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-    var ul = document.querySelector("#list");
+
     // append list item to the unordered list
     ul.appendChild(li);
+    // adding LocalStorage
+    addtoLocalStorage(li, text);
     // show task adding message
     showMsg("added");
     // reset text area
     document.querySelector("#form").reset();
+    document.querySelector("#emptylist").classList.remove("d-inline");
+    document.querySelector("#emptylist").classList.add("d-none");
   } else {
     showMsg("empty");
   }
@@ -37,26 +57,25 @@ function refresh() {
     element.addEventListener("click", taskDelete);
   });
 }
-var toggle=0;
+var toggle = 0;
 function taskDone() {
-  if (toggle%2==0){
-  this.setAttribute(
-    "style",
-    "text-decoration: line-through; font-style: italic;"
-  );
-  toggle++;
-}
-else {
-  this.setAttribute(
-    "style",
-    "text-decoration: none; font-style: normal;"
-  );
-  toggle++;
-}
+  if (toggle % 2 == 0) {
+    this.setAttribute(
+      "style",
+      "text-decoration: line-through; font-style: italic;"
+    );
+    toggle++;
+  } else {
+    this.setAttribute("style", "text-decoration: none; font-style: normal;");
+    toggle++;
+  }
 }
 function taskDelete() {
+  let key = this.parentElement.innerText.slice("0", "-2");
   this.parentElement.remove();
+  removefromLocalStorage(key);
   showMsg("deleted");
+  refresh();
 }
 
 function showMsg(msg) {
@@ -84,4 +103,12 @@ function showMsg(msg) {
   setTimeout(() => {
     container.classList.remove("d-block");
   }, 3000);
+}
+
+function addtoLocalStorage(li, text) {
+  localStorage.setItem(text, li.innerHTML);
+}
+
+function removefromLocalStorage(param) {
+  localStorage.removeItem(param);
 }

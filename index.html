@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <title>Yapılacaklar Listesi</title>
   </head>
-  <body class="container justify-content-center">
+  <body class="container justify-content-center" onload="getTasks();">
     <!--centering body-->
     <div class="mr-1 text-center" style="position: relative">
       <div style="position: absolute; top: 0; right: 0">
@@ -91,56 +91,10 @@
         
         </div>
       </form>
+      <div id="emptylist" class="d-inline">"Ekle" butonunu kullanarak yeni bir görev ekleyebilirsiniz.</div>
       </div>
 
       <ul id="list" class="text-left list-unstyled">
-        <!-- list-style:none align-left-->
-        <!-- closing icon to the right of list items-->
-        <li>
-          3 Litre Su İç<button
-            type="button"
-            class="close mt-1 mr-2 p-2"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </li>
-        <li>
-          Ödevleri Yap<button
-            type="button"
-            class="close mt-1 mr-2 p-2"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </li>
-        <li>
-          En Az 3 Saat Kodlama Yap<button
-            type="button"
-            class="close mt-1 mr-2 p-2"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </li>
-        <li>
-          Yemek Yap<button
-            type="button"
-            class="close mt-1 mr-2 p-2"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </li>
-        <li>
-          50 Sayfa Kitap Oku<button
-            type="button"
-            class="close mt-1 mr-2 p-2"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </li>
       </ul>
       <script
         src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
